@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Научно-популярный журнал «Право и устойчивое развитие»</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Общие стили */
+        :root {
+            --primary-color: #003366; /* Глубокий синий */
+            --secondary-color: #009975; /* Изумрудный зеленый */
+            --accent-color: #f39c12; /* Акцентный оранжевый */
+            --background-color: #fdfdfd;
+            --text-color: #333;
+            --light-gray-color: #ecf0f1;
+            --heading-font: 'Montserrat', sans-serif;
+            --body-font: 'Roboto', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--body-font);
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--heading-font);
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        
+        section {
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-divider {
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+
+        .section-divider svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 90px;
+        }
+
+        .section-divider .shape-fill {
+            fill: var(--background-color);
+        }
+        
+        .section-divider-top {
+            top: -1px;
+            bottom: auto;
+            transform: rotate(0deg);
+        }
+        
+        .section-divider-top .shape-fill {
+             fill: #FFFFFF;
+        }
+
+        /* Навигационное меню */
+        .navbar {
+            background-color: rgba(0, 51, 102, 0.9);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo svg {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--accent-color);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Главный экран */
+        .hero {
+            color: white;
+            text-align: center;
+            padding: 150px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 90vh;
+            background: linear-gradient(-45deg, #003366, #004d80, #009975, #00b38a);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: white;
+            font-weight: 700;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+        }
+        
+        .btn {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: none;
+        }
+        
+        .btn:hover {
+            background-color: #e68a00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Секции */
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.8rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        #about {
+            background-color: #fff;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .about-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .about-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+        
+        .about-card .icon {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        #archive {
+            background-color: var(--light-gray-color);
+        }
+        
+        .archive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .archive-item {
+            background-color: white;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .archive-item:hover {
+             transform: translateY(-10px);
+             box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+        
+        .archive-item img {
+            max-width: 100%;
+            height: auto;
+            transition: transform 0.4s ease;
+        }
+        
+        .archive-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .archive-item-content {
+            padding: 20px;
+        }
+
+        /* Секции с фоном */
+        .background-section {
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+        }
+        
+        .background-section h2, .background-section p {
+            color: white;
+        }
+        
+        .background-section .section-title::after {
+            background-color: var(--accent-color);
+        }
+        
+        .overlay {
+            background-color: rgba(0, 51, 102, 0.7);
+            padding: 80px 0;
+        }
+        
+        #authors {
+            background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop');
+        }
+        
+        #subscribers {
+            background-image: url('https://images.unsplash.com/photo-1556740738-b6a63e2775d2?q=80&w=2070&auto=format&fit=crop');
+        }
+        
+        #partners {
+            background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2070&auto=format&fit=crop');
+        }
+
+        .info-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        #advertisers {
+            background-color: #fff;
+        }
+
+        /* Контакты */
+        #contacts {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        #contacts h2, #contacts p {
+            color: white;
+        }
+        
+        #contacts .section-title::after {
+            background-color: var(--accent-color);
+        }
+        
+        .contact-info {
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        /* Футер */
+        footer {
+            background-color: #222;
+            color: #aaa;
+            text-align: center;
+            padding: 25px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: var(--primary-color);
+                position: absolute;
+                top: 70px;
+                left: 0;
+                padding: 10px 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+                text-align: center;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .background-section {
+                background-attachment: scroll; /* Убираем эффект параллакса на мобильных для производительности */
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Навигационное меню -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g><path fill="#FFFFFF" d="M50,1A49,49,0,1,0,99,50,49.05,49.05,0,0,0,50,1ZM24.22,75.78a4,4,0,0,1-5.66-5.66L44.34,44.34,22.12,22.12a4,4,0,0,1,5.66-5.66L53.56,42.24,75.78,20.06a4,4,0,1,1,5.66,5.66L55.66,53.5,77.88,75.72a4,4,0,0,1-5.66,5.66L46.44,55.6Z"/></g></svg>
+                <span>Право и УР</span>
+            </a>
+            <button class="menu-toggle" id="menu-toggle">&#9776;</button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#about">О Журнале</a></li>
+                <li><a href="#archive">Архив</a></li>
+                <li><a href="#authors">Авторам</a></li>
+                <li><a href="#subscribers">Подписчикам</a></li>
+                <li><a href="#advertisers">Рекламодателям</a></li>
+                <li><a href="#partners">Партнерам</a></li>
+                <li><a href="#contacts">Контакты</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Главный экран -->
+    <header class="hero">
+        <div class="container">
+            <h1>Право и устойчивое развитие</h1>
+            <p>Ваш источник актуальной информации на стыке юриспруденции и концепций устойчивого развития.</p>
+            <a href="#subscribers" class="btn">Подписаться</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- О Журнале -->
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">О Журнале</h2>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <div class="icon">&#128218;</div>
+                        <h3>Миссия и Цели</h3>
+                        <p>Создание платформы для обсуждения и распространения знаний о роли права в достижении целей устойчивого развития.</p>
+                    </div>
+                    <div class="about-card">
+                         <div class="icon">&#127757;</div>
+                        <h3>Научные направления</h3>
+                        <p>Экологическое право, "зеленая" экономика, международные соглашения, корпоративная социальная ответственность.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="icon">&#128100;</div>
+                        <h3>Редколлегия</h3>
+                        <p>Ведущие эксперты и ученые в области права и устойчивого развития, обеспечивающие высокий научный уровень публикаций.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="section-divider">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill" style="fill: #ecf0f1;"></path>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Архив номеров -->
+        <section id="archive">
+            <div class="container">
+                <h2 class="section-title">Архив номеров</h2>
+                <div class="archive-grid">
+                    <div class="archive-item">
+                        <img src="https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?q=80&w=2070&auto=format&fit=cover" alt="Обложка журнала">
+                        <div class="archive-item-content">
+                            <h4>Выпуск №1 (2024)</h4>
+                            <p>Правовые основы зеленой экономики</p>
+                            <a href="#" class="btn">Читать</a>
+                        </div>
+                    </div>
+                    <div class="archive-item">
+                        <img src="https://images.unsplash.com/photo-1529119363590-149dfa503b97?q=80&w=2070&auto=format&fit=cover" alt="Обложка журнала">
+                         <div class="archive-item-content">
+                            <h4>Выпуск №4 (2023)</h4>
+                            <p>Социальная ответственность бизнеса</p>
+                            <a href="#" class="btn">Читать</a>
+                        </div>
+                    </div>
+                    <div class="archive-item">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=cover" alt="Обложка журнала">
+                         <div class="archive-item-content">
+                            <h4>Выпуск №3 (2023)</h4>
+                            <p>Международные экологические соглашения</p>
+                            <a href="#" class="btn">Читать</a>
+                        </div>
+                    </div>
+                     <div class="archive-item">
+                        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=1974&auto=format&fit=cover" alt="Обложка журнала">
+                         <div class="archive-item-content">
+                            <h4>Выпуск №2 (2023)</h4>
+                            <p>Устойчивое развитие мегаполисов</p>
+                            <a href="#" class="btn">Читать</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Для авторов -->
+        <section id="authors" class="background-section">
+            <div class="overlay">
+                 <div class="container info-content">
+                    <h2 class="section-title">Для авторов</h2>
+                    <p>Приглашаем к публикации ученых, аспирантов и практикующих юристов. Мы гарантируем объективное рецензирование и быструю публикацию. Ознакомьтесь с требованиями к рукописям и правилами оформления статей на нашем сайте.</p>
+                    <a href="#" class="btn">Узнать больше</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Для рекламодателей -->
+        <section id="advertisers">
+            <div class="container info-content" style="text-align:center;">
+                <h2 class="section-title">Для рекламодателей</h2>
+                <p>Наш журнал читает целевая аудитория профессионалов. Размещение рекламы в «Праве и устойчивом развитии» – это отличная возможность заявить о себе в экспертном сообществе. Мы предлагаем различные форматы рекламных материалов.</p>
+                <a href="#" class="btn">Медиа-кит</a>
+            </div>
+        </section>
+
+        <!-- Для подписчиков -->
+        <section id="subscribers" class="background-section">
+            <div class="overlay">
+                <div class="container info-content">
+                    <h2 class="section-title">Для подписчиков</h2>
+                    <p>Оформите подписку, чтобы получать свежие номера первыми. Мы предлагаем гибкие условия для индивидуальных и корпоративных клиентов. Оставайтесь в курсе последних тенденций в области правового регулирования устойчивого развития.</p>
+                    <a href="#" class="btn">Оформить подписку</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Для партнеров -->
+        <section id="partners" class="background-section">
+            <div class="section-divider section-divider-top">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill" style="fill: #fdfdfd;"></path>
+                </svg>
+            </div>
+            <div class="overlay">
+                 <div class="container info-content">
+                    <h2 class="section-title">Для партнеров</h2>
+                    <p>Мы открыты к сотрудничеству с университетами, научными центрами, юридическими фирмами и общественными организациями. Давайте вместе продвигать идеи устойчивого развития через качественную научную дискуссию.</p>
+                     <a href="#" class="btn">Стать партнером</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Контакты -->
+        <section id="contacts">
+            <div class="container">
+                <h2 class="section-title">Контакты</h2>
+                <div class="contact-info">
+                    <p><strong>Адрес редакции:</strong> г. Москва, ул. Научная, д. 10, офис 505</p>
+                    <p><strong>Телефон:</strong> +7 (495) 123-45-67</p>
+                    <p><strong>Email:</strong> editor@law-sd.ru</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Научно-популярный журнал «Право и устойчивое развитие». Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+        const navLinkItems = document.querySelectorAll('.nav-links a');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Закрываем меню при клике на ссылку
+        navLinkItems.forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
